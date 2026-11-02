@@ -1,69 +1,26 @@
-import Image from "next/image";
+import { Activity, Droplets, RadioTower, ThermometerSun, Wind, ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
+import MetricCard from '@/components/dashboard/MetricCard';
+
+const stations = [
+  {name:'Lagos Mainland',air:48,water:82,status:'Good'},
+  {name:'Ikeja Central',air:112,water:71,status:'Needs attention'},
+  {name:'Victoria Island',air:38,water:85,status:'Good'},
+  {name:'Lekki Peninsula',air:72,water:74,status:'Moderate'},
+];
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+  return <div className="space-y-7">
+    <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><p className="mb-1 text-sm font-medium text-emerald-700">Overview · Demonstration data</p><h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Environmental Overview</h1><p className="mt-2 max-w-2xl text-sm text-slate-500">Monitor environmental indicators and explore sample monitoring locations across Lagos.</p></div><span className="w-fit rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700">● Sample data only</span></div>
+    <section aria-label="Environmental metrics" className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <MetricCard label="Average air quality" value="68 AQI" detail="Across 4 sample stations" icon={Wind}/>
+      <MetricCard label="Water quality index" value="78/100" detail="Sample index, not a safety certification" icon={Droplets} tone="blue"/>
+      <MetricCard label="Average temperature" value="29.9°C" detail="Sample reading average" icon={ThermometerSun} tone="amber"/>
+      <MetricCard label="Monitoring stations" value="04" detail="Simulated monitoring locations" icon={RadioTower}/>
+    </section>
+    <div className="grid grid-cols-1 gap-5 xl:grid-cols-[minmax(0,1.7fr)_minmax(260px,1fr)]">
+      <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div className="flex items-center justify-between gap-3"><h2 className="text-lg font-semibold">Monitoring stations</h2><Link href="/stations" className="inline-flex items-center gap-1 text-sm font-semibold text-emerald-700 hover:underline">View all <ArrowUpRight size={16}/></Link></div><div className="mt-4 overflow-x-auto"><table className="w-full min-w-[470px] text-left text-sm"><thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500"><tr><th className="p-3">Station</th><th className="p-3">AQI</th><th className="p-3">Water</th><th className="p-3">Status</th></tr></thead><tbody>{stations.map(s=><tr className="border-t border-slate-100" key={s.name}><td className="p-3 font-medium">{s.name}</td><td className="p-3">{s.air}</td><td className="p-3">{s.water}</td><td className="p-3"><span className={`rounded-full px-2 py-1 text-xs font-semibold ${s.status==='Good'?'bg-emerald-50 text-emerald-700':s.status==='Moderate'?'bg-amber-50 text-amber-700':'bg-rose-50 text-rose-700'}`}>{s.status}</span></td></tr>)}</tbody></table></div></section>
+      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div className="flex items-center gap-2"><Activity className="text-emerald-700" size={20}/><h2 className="text-lg font-semibold">System summary</h2></div><p className="mt-4 text-sm leading-7 text-slate-600">EcoTrack is a foundation-stage environmental dashboard. This overview uses illustrative data until a verified environmental data source is connected.</p><Link href="/health" className="mt-5 inline-flex rounded-xl bg-emerald-800 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700">Open system health <ArrowUpRight size={16} className="ml-2"/></Link></section>
     </div>
-  );
+  </div>;
 }
