@@ -83,7 +83,7 @@ export default function Home() {
           value={`${averageWater}/100`}
           detail="Sample index, not a safety certification"
           icon={Droplets}
-          tone="blue"
+          tone="sky"
         />
 
         <MetricCard
