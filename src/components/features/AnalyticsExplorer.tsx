@@ -1,7 +1,8 @@
-
 'use client';
 
 import { useState } from 'react';
+
+import EnvironmentalChart from '@/components/dashboard/EnvironmentalChart';
 
 import { trend } from '@/data/environment';
 
@@ -49,27 +50,6 @@ export default function AnalyticsExplorer() {
   const minimum = calculateMinimum(values);
   const maximum = calculateMaximum(values);
 
-  // Provide a safe chart range, including when values are identical.
-  const rawMin = minimum;
-  const rawMax = maximum;
-
-  const padding = Math.max((rawMax - rawMin) * 0.1, 1);
-
-  const min = Math.max(0, rawMin - padding);
-  const max = rawMax + padding;
-
-  const range = max - min || 1;
-
-  // Generate SVG chart coordinates.
-  const points = values
-    .map((value, index) => {
-      const x = 45 + index * 84;
-      const y = 215 - ((value - min) / range) * 150;
-
-      return `${x},${y}`;
-    })
-    .join(' ');
-
   return (
     <div className="space-y-5">
 
@@ -103,107 +83,13 @@ export default function AnalyticsExplorer() {
       {/* ANALYTICS CHART */}
       <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
 
-        <h2 className="text-lg font-semibold">
-          Weekly {selected.label.toLowerCase()} trend
-        </h2>
-
-        <p className="mt-1 text-sm text-slate-500">
-          Illustrative readings · not live sensor measurements
-        </p>
-
-        {/* SVG LINE CHART */}
-        <div className="mt-5 overflow-x-auto">
-
-          <svg
-            role="img"
-            aria-label={`Line graph of weekly ${selected.label.toLowerCase()}`}
-            viewBox="0 0 600 260"
-            className="min-w-[520px] w-full"
-          >
-
-            <line
-              x1="35"
-              y1="215"
-              x2="560"
-              y2="215"
-              stroke="#cbd5e1"
-            />
-
-            <line
-              x1="35"
-              y1="65"
-              x2="560"
-              y2="65"
-              stroke="#e2e8f0"
-              strokeDasharray="5 5"
-            />
-
-            <text
-              x="5"
-              y="68"
-              fontSize="11"
-              fill="#64748b"
-            >
-              {max.toFixed(1)}
-            </text>
-
-            <text
-              x="5"
-              y="218"
-              fontSize="11"
-              fill="#64748b"
-            >
-              {min.toFixed(1)}
-            </text>
-
-            <polyline
-              fill="none"
-              stroke="#059669"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              points={points}
-            />
-
-            {values.map((value, index) => {
-
-              const x = 45 + index * 84;
-
-              const y =
-                215 - ((value - min) / range) * 150;
-
-              return (
-                <g key={trend[index].day}>
-
-                  <circle
-                    cx={x}
-                    cy={y}
-                    r="5"
-                    fill="#047857"
-                  >
-                    <title>
-                      {`${trend[index].day}: ${value} ${selected.unit}`}
-                    </title>
-                  </circle>
-
-                  <text
-                    x={x}
-                    y="244"
-                    textAnchor="middle"
-                    fontSize="12"
-                    fill="#475569"
-                  >
-                    {trend[index].day}
-                  </text>
-
-                </g>
-              );
-
-            })}
-
-          </svg>
-
-        </div>
+        <EnvironmentalChart
+          data={trend}
+          metric={metric}
+          title={`Weekly ${selected.label.toLowerCase()} trend`}
+          unit={selected.unit}
+          description="Illustrative readings · not live sensor measurements"
+        />
 
         {/* STATISTICAL SUMMARY */}
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
