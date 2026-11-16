@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+# EcoTrack — Environmental Monitoring Dashboard
+
+EcoTrack is a responsive environmental monitoring dashboard built with Next.js, React, TypeScript, and Tailwind CSS.
+
+The application demonstrates environmental monitoring workflows using sample station readings from Lagos, Nigeria.
+
+## Live Application
+
+https://ecotrack-capstone.vercel.app/
+
+## Features
+
+- Environmental summary dashboard
+- Searchable and filterable monitoring stations
+- Environmental analytics and trend visualisation
+- Active and acknowledged alert management
+- Alert severity filtering
+- Downloadable CSV environmental reports
+- System health API and status page
+- Reusable loading, empty and error components
+- Responsive layouts
+
+## Technology Stack
+
+- Next.js 16.4.4
+- React 19.3.0
+- TypeScript
+- Tailwind CSS 4
+- Lucide React
+- Vercel
 
 ## Getting Started
 
-First, run the development server:
+Clone the repository:
+
+```bash
+git clone https://github.com/Abdullbaasit/ecotrack-capstone.git
+cd ecotrack-capstone
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Validation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npx tsc --noEmit
+npm run lint
+npm run build
+```
 
-## Learn More
+## Application Routes
 
-To learn more about Next.js, take a look at the following resources:
+| Route | Description |
+|---|---|
+| / | Environmental dashboard |
+| /stations | Monitoring station explorer |
+| /analytics | Environmental analytics |
+| /alerts | Alert management |
+| /reports | Environmental reporting |
+| /settings | Application settings |
+| /health | Application health interface |
+| /api/health | Health API endpoint |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Data Disclaimer
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+EcoTrack currently uses illustrative environmental monitoring data.
 
-## Deploy on Vercel
+Readings are not live measurements, official environmental warnings, or certifications of air or water safety.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Future Improvements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Verified environmental data integrations
+- Historical environmental data storage
+- Geographic monitoring visualisations
+- Persistent alert management
+- Automated tests
+
+## Project Context
+
+Developed as a React capstone project demonstrating reusable components, state management, TypeScript models, API integration and deployment.
+
+## Repository
+
+https://github.com/Abdullbaasit/ecotrack-capstone
