@@ -39,7 +39,8 @@ export default function EnvironmentalAssistant() {
   const [isStreaming, setIsStreaming] = useState(false);
 
   const controllerRef = useRef<AbortController | null>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
+const bottomRef = useRef<HTMLDivElement>(null);
+const nextMessageId = useRef(2);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({
@@ -60,10 +61,10 @@ export default function EnvironmentalAssistant() {
     const question = (suggestedQuestion ?? input).trim();
 
     if (!question || isStreaming) return;
+const userId = nextMessageId.current;
+const assistantId = userId + 1;
 
-    const userId = Date.now();
-    const assistantId = userId + 1;
-
+nextMessageId.current += 2;
     setMessages(previous => [
       ...previous,
       {
@@ -170,7 +171,7 @@ export default function EnvironmentalAssistant() {
 
     setMessages([
       {
-        id: Date.now(),
+        id: nextMessageId.current++,
         role: 'assistant',
         content:
           'Conversation cleared. What environmental information would you like to explore?',
