@@ -1,10 +1,21 @@
 
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
 import type {
   EnvironmentalMetric,
   Station,
   StationStatus,
   TrendPoint,
 } from '@/types/environment';
+
+/**
+ * Merge Tailwind CSS classes safely.
+ * Required by shadcn/ui.
+ */
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 
 /**
  * Calculate the arithmetic mean of numeric values.
@@ -65,14 +76,11 @@ export function formatTemperature(
   const temperature =
     unit === 'F' ? (value * 9) / 5 + 32 : value;
 
-  return `${temperature.toFixed(1)}°${unit}`;
+  return `${temperature.toFixed(1)}\u00B0${unit}`;
 }
 
 /**
  * Return the status already assigned to a demonstration station.
- *
- * This function does not independently determine environmental
- * safety or calculate regulatory AQI classifications.
  */
 export function getStationStatus(
   station: Station,
