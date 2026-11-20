@@ -1,5 +1,6 @@
-import { LayoutDashboard, RadioTower, ChartNoAxesCombined, BellRing, FileBarChart2, Settings2, HeartPulse } from 'lucide-react';
+import { LayoutDashboard, RadioTower, ChartNoAxesCombined, BellRing, FileBarChart2, Settings2, HeartPulse, Bot } from 'lucide-react';
 export const navigation = [
+  { href: '/assistant', label: 'Environmental Assistant', icon: Bot },
   { href: '/', label: 'Overview', icon: LayoutDashboard },
   { href: '/stations', label: 'Monitoring Stations', icon: RadioTower },
   { href: '/analytics', label: 'Analytics', icon: ChartNoAxesCombined },
