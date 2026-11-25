@@ -1,6 +1,6 @@
 
 'use client';
-
+import StationAnalysisPanel from './StationAnalysisPanel';
 import { useEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import {
@@ -209,7 +209,7 @@ nextMessageId.current += 2;
       </div>
 
       <div className="flex-1 space-y-5 overflow-y-auto p-4 sm:p-6">
-
+      <StationAnalysisPanel />
         {messages.map(message => (
           <div
             key={message.id}

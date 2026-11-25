@@ -95,3 +95,100 @@ Developed as a React capstone project demonstrating reusable components, state m
 ## Repository
 
 https://github.com/Abdullbaasit/ecotrack-capstone
+
+
+## FE-07: Structured Tool Results
+
+EcoTrack implements a server-side environmental station analysis tool.
+
+The tool retrieves structured environmental readings from the application's demonstration dataset and returns validated results.
+
+### Tool Name
+
+`getStationAnalysis`
+
+### Tool Description
+
+Retrieve environmental readings for a specific monitoring station using its station ID.
+
+### Input Schema
+
+| Property | Type | Required | Description |
+|---|---|---|---|
+| stationId | string | Yes | Unique monitoring station identifier |
+
+Example input:
+
+```json
+{
+  "stationId": "ST-002"
+}
+```
+
+### Output Schema
+
+The tool returns:
+
+```json
+{
+  "stationId": "ST-002",
+  "name": "Ikeja Central",
+  "area": "Ikeja",
+  "readings": {
+    "air": 112,
+    "water": 71,
+    "temperature": 31.2,
+    "humidity": 68
+  },
+  "status": "Needs attention",
+  "dataSource": "EcoTrack demonstration dataset",
+  "disclaimer": "These measurements are illustrative and do not represent live environmental sensor data."
+}
+```
+
+### Execution
+
+The server-side execution function is:
+
+`executeStationAnalysis()`
+
+It validates incoming parameters, locates the requested monitoring station and validates the structured output using Zod.
+
+### API Endpoint
+
+`POST /api/station-analysis`
+
+Example request:
+
+```json
+{
+  "stationId": "ST-002"
+}
+```
+
+Successful execution returns structured station analysis.
+
+An invalid station identifier returns HTTP 404.
+
+Invalid request parameters are rejected through input validation.
+
+### Tool Interface States
+
+The application demonstrates the following tool lifecycle states:
+
+- Input available
+- Output available
+- Output error
+
+Tool results are displayed through the Environmental Station Analysis interface.
+
+### Technology Used
+
+- Next.js API Routes
+- TypeScript
+- Zod schema validation
+- React components
+
+### Data Limitations
+
+The tool uses EcoTrack's demonstration dataset. It does not retrieve live environmental sensor measurements or independently establish environmental safety conditions.
